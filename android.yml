@@ -1,0 +1,2 @@
+- run: |
+    for d in hdpi mdpi xhdpi xxhdpi; do mkdir -p app/src/main/res/mipmap-$d; cp app/src/main/res/mipmap-xxxhdpi/ic_launcher.png app/src/main/res/mipmap-$d/ || true; cp app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png app/src/main/res/mipmap-$d/ || true; done
