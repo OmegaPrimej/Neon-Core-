@@ -1,7 +1,13 @@
 plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
+  id "com.google.devtools.ksp" version "1.9.22-1.0.17"
+  id 'com.android.application'
+  id 'org.jetbrains.kotlin.android'
+
+dependencies {
+  ksp("your-annotation-lib")
+  // NOT annotationProcessor, NOT kapt
 }
+    
 android {
     namespace 'com.neon.core'
     compileSdk 34
