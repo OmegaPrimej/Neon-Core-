@@ -1,41 +1,50 @@
-name: Build Fire TV APK
-on: [push, workflow_dispatch]
+name: AVS Token Runtime - Vega OS Alexa
+
+on:
+  workflow_dispatch:
+    inputs:
+      auth_code:
+        description: 'ONE-TIME Amazon authorization code (leave blank to just refresh token)'
+        required: false
+        type: string
 
 jobs:
-  build:
+  run-avs: 
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          python-version: '3.11'
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Install Fire TV / Vega OS SDK packages
+      - name: Set AVS Credentials from Secrets
         run: |
-          yes | sdkmanager --licenses
-          sdkmanager "platforms;android-34" "build-tools;34.0.0" "platforms;android-33" "extras;amazon;firetv"
+          echo "AVS_CLIENT_ID=${{ secrets.AVS_CLIENT_ID }}" >> $GITHUB_ENV
+          echo "AVS_CLIENT_SECRET=${{ secrets.AVS_CLIENT_SECRET }}" >> $GITHUB_ENV
+          echo "AVS_REDIRECT_URI=${{ secrets.AVS_REDIRECT_URI }}" >> $GITHUB_ENV
 
-      - name: Generate Wrapper (Fixes your gradlew issue)
+      - name: Exchange Authorization Code (First Time)
+        if: ${{ inputs.auth_code != '' }}
         run: |
-          wget -q https://services.gradle.org/distributions/gradle-8.4-bin.zip
-          unzip -q gradle-8.4-bin.zip
-          ./gradle-8.4/bin/gradle wrapper --gradle-version 8.4
-          chmod +x gradlew
+          python avs_token_runtime.py "${{ inputs.auth_code }}"
 
-      - name: Build APK
-        run: ./gradlew assembleDebug --stacktrace
+      - name: Get Valid Access Token (Refresh if needed)
+        if: ${{ inputs.auth_code == '' }}
+        run: |
+          python avs_token_runtime.py
 
-      - name: Upload APK
+      - name: Show Token Status
+        run: |
+          ls -la avs_tokens.json
+          cat avs_tokens.json | python -m json.tool
+
+      - name: Upload avs_tokens.json
         uses: actions/upload-artifact@v4
         with:
-          name: neon-core-firetv
-          path: app/build/outputs/apk/debug/app-debug.apk
+          name: avs-tokens
+          path: avs_tokens.json
 
 
 
@@ -43,52 +52,3 @@ jobs:
 
 
 
-
-
-
-"""
-name: Build Fire TV APK
-
-on: [push, workflow_dispatch]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v5
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v4
-        with:
-          accept-android-sdk-licenses: true
-          log-accepted-android-sdk-licenses: false
-
-      - name: Install Gradle 8.4 manually
-        run: |
-          wget https://services.gradle.org/distributions/gradle-8.4-bin.zip
-          unzip -q gradle-8.4-bin.zip
-          echo "$PWD/gradle-8.4/bin" >> $GITHUB_PATH
-          gradle --version
-
-      - name: Generate Wrapper
-        run: |
-          gradle wrapper --gradle-version 8.4
-          chmod +x gradlew
-          ./gradlew --version
-
-      - name: Build APK
-        run: ./gradlew assembleDebug --stacktrace
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: neon-core-firetv
-          path: app/build/outputs/apk/debug/app-debug.apk
-          """
