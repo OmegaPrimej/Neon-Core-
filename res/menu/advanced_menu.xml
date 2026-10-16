@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/action_alexa" android:title="Alexa">
+        <menu>
+            <item android:id="@+id/action_alexa_enable" android:title="Enable Alexa" android:checkable="true" />
+            <item android:id="@+id/action_alexa_login" android:title="Login with Amazon" />
+            <item android:id="@+id/action_alexa_logout" android:title="Logout" />
+            <item android:id="@+id/action_alexa_push_to_talk" android:title="Push To Talk" />
+            <item android:id="@+id/action_alexa_status" android:title="Status" />
+        </menu>
+    </item>
+
+    <item android:id="@+id/action_assistant" android:title="Voice Assistant">
+        <menu>
+            <item android:id="@+id/action_assistant_alexa" android:title="Use Alexa" android:checkable="true" />
+            <item android:id="@+id/action_assistant_google" android:title="Use Google" android:checkable="true" />
+            <item android:id="@+id/action_assistant_custom" android:title="Use Neon" android:checkable="true" />
+        </menu>
+    </item>
+
+    <item android:id="@+id/action_voice_style" android:title="Voice Style">
+        <menu>
+            <item android:id="@+id/action_style_neutral" android:title="Neutral" android:checkable="true" android:checked="true" />
+            <item android:id="@+id/action_style_friendly" android:title="Friendly" android:checkable="true" />
+            <item android:id="@+id/action_style_warm" android:title="Warm" android:checkable="true" />
+            <item android:id="@+id/action_style_energetic" android:title="Energetic" android:checkable="true" />
+        </menu>
+    </item>
+
+    <item android:id="@+id/action_dev" android:title="Developer">
+        <menu>
+            <item android:id="@+id/action_view_logs" android:title="View Logs" />
+            <item android:id="@+id/action_clear_cache" android:title="Clear Cache" />
+            <item android:id="@+id/action_reset_settings" android:title="Reset Settings" />
+            <item android:id="@+id/action_about" android:title="About Neon Core" />
+        </menu>
+    </item>
+
+    <item android:id="@+id/action_exit" android:title="Exit App" />
+</menu>
