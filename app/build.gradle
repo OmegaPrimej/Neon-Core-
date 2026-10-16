@@ -3,10 +3,10 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 android {
-    namespace 'com.fuzzybunny.club'
+    namespace 'com.neon.core'
     compileSdk 34
     defaultConfig {
-        applicationId "com.fuzzybunny.club"
+        applicationId "com.neon.core"
         minSdk 21
         targetSdk 34
         versionCode 1
