@@ -1,4 +1,4 @@
-package com.fuzzybunny.club
+package com.neon.core
 
 import android.os.Bundle
 import android.widget.TextView
@@ -9,6 +9,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val liveStatus = findViewById<TextView>(R.id.liveStatus)
-        liveStatus.text = "👻 Ghost QR Active - Fuzzy Bunny Club"
+        liveStatus.text = "👻 Ghost QR Active - Neon Core"
     }
 }
