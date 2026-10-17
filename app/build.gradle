@@ -1,34 +1,36 @@
-package com.neon.core.core.ui
-import com.neon.core.core.R
-import com.neon.core.alexa.AlexaController
-
 plugins {
-  id "com.google.devtools.ksp" version "1.9.22-1.0.17"
-  id 'com.android.application'
-  id 'org.jetbrains.kotlin.android'
-
-dependencies {
-  ksp("your-annotation-lib")
-  // NOT annotationProcessor, NOT kapt
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
 }
-    
+
 android {
     namespace 'com.neon.core'
     compileSdk 34
+
     defaultConfig {
-        applicationId "com.neon.core"
+        applicationId 'com.neon.core'
         minSdk 21
         targetSdk 34
         versionCode 1
-        versionName "1.0"
+        versionName '1.0'
     }
-    buildTypes { release { minifyEnabled false } }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    kotlinOptions { jvmTarget = '1.8' }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
+
 dependencies {
     implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
