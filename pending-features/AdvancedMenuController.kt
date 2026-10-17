@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
-import com.neoncore.R
+import com.neon.core.R
 import com.neoncore.alexa.AlexaController
 import com.neoncore.voice.Assistant
 import com.neoncore.voice.NeonStyle
