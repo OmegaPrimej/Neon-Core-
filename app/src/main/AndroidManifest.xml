@@ -16,7 +16,7 @@
         android:icon="@mipmap/ic_launcher"
         android:banner="@mipmap/ic_launcher"
         android:label="Neon Core"
-        android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+        android:theme="@style/Theme.NeonCore">
 
         <activity
             android:name=".MainActivity"
